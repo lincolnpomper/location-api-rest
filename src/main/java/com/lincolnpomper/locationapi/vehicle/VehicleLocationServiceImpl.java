@@ -24,15 +24,12 @@ public class VehicleLocationServiceImpl implements VehicleLocationService {
 
 		Vehicle vehicle = new Vehicle(vehiclePlate);
 		List<VehicleLocation> listVehicleLocation = vehicleLocationRepository.findAllByVehicle(vehicle.getPlate());
-		listVehicleLocation = listVehicleLocation.stream()
-				.filter(item -> item.getDate().isAfter(startDate) && item.getDate().isBefore(endDate))
-				.collect(Collectors.toList());
-
-		Iterable<Location> listLocation = locationRepository.findAll();
+		listVehicleLocation = filterByDate(startDate, endDate, listVehicleLocation);
 
 		final SortedSet<VehicleLocationGrouped> result = new TreeSet<>(Comparator.comparing(grouped -> grouped.location.getName()));
 
-		for (Location location : listLocation) {
+		for (Location location : locationRepository.findAll()) {
+
 			final List<VehicleLocation> vehicleLocationInsideRadius = listVehicleLocation.stream()
 					.filter(vehicleLocation -> isInsideRadius(new Coordinate(location), vehicleLocation, location.getRadius()))
 					.collect(Collectors.toList());
@@ -44,6 +41,13 @@ public class VehicleLocationServiceImpl implements VehicleLocationService {
 		}
 
 		return result;
+	}
+
+	private List<VehicleLocation> filterByDate(LocalDateTime startDate, LocalDateTime endDate, List<VehicleLocation> listVehicleLocation) {
+
+		return listVehicleLocation.stream()
+				.filter(item -> item.getDate().isAfter(startDate) && item.getDate().isBefore(endDate))
+				.collect(Collectors.toList());
 	}
 
 	@Override public List<VehicleLocationTimeVO> getLocationsByPlateAndDateWithSpentTime(String vehiclePlate, LocalDateTime startDate,
@@ -58,13 +62,18 @@ public class VehicleLocationServiceImpl implements VehicleLocationService {
 			if (!item.vehicleLocationList.isEmpty()) {
 
 				final Vehicle vehicle = item.vehicleLocationList.first().getVehicle();
-				LocalDateTime vehicleStartDate =
-						item.vehicleLocationList.stream().min(Comparator.comparing(VehicleLocation::getDate)).get().getDate();
-				LocalDateTime vehicleEndDate =
-						item.vehicleLocationList.stream().max(Comparator.comparing(VehicleLocation::getDate)).get().getDate();
 
-				long minutes = Duration.between(vehicleStartDate, vehicleEndDate).getSeconds() / 60;
-				list.add(new VehicleLocationTimeVO(vehicle, item.location, minutes));
+				Optional<VehicleLocation> optionalMin =
+						item.vehicleLocationList.stream().min(Comparator.comparing(VehicleLocation::getDate));
+				Optional<VehicleLocation> optionalMax =
+						item.vehicleLocationList.stream().max(Comparator.comparing(VehicleLocation::getDate));
+
+				if (optionalMin.isPresent() && optionalMax.isPresent()) {
+					LocalDateTime vehicleStartDate = optionalMin.get().getDate();
+					LocalDateTime vehicleEndDate = optionalMax.get().getDate();
+					long minutes = Duration.between(vehicleStartDate, vehicleEndDate).getSeconds() / 60;
+					list.add(new VehicleLocationTimeVO(vehicle, item.location, minutes));
+				}
 			}
 		});
 

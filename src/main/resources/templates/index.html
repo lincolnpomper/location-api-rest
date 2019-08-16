@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <title>Localizador de veículos</title>
@@ -19,28 +19,34 @@
         </div>
 
         <form class="form-horizontal" id="search-form">
-            <div class="form-group form-group-lg">
 
-                <div class="col-sm-10">
-                    <label for="selectVehicles" class="col-sm-2 control-label">Placa:</label>
-                    <select id="selectVehicles" onchange="onchangeVehicles()">
-                        <option>Escolha</option>
-                    </select>
-                </div>
-
-                <div class="col-sm-10">
-                    <label for="inputStartDate" class="col-sm-2 control-label">Data inicial:</label>
-                    <input type="text" id="inputStartDate" value="01-01-2000" style="width 100px;" class="form-control"/>
-
-                    <label for="inputEndDate" class="col-sm-2 control-label">Data final:</label>
-                    <input type="text" id="inputEndDate" value="01-01-2019" style="width 100px;" class="form-control"/>
-                </div>
-
+            <div class="form-group form-inline">
+                <label for="selectVehicles" class="col-sm-2 control-label">Placa:</label>
+                <select id="selectVehicles" class="form-control" onchange="onchangeVehicles()">
+                    <option>Escolha</option>
+                </select>
             </div>
+
+            <div class="form-group form-inline">
+                <label for="inputStartDate" class="col-sm-2 control-label">Data inicial:</label>
+                <input type="text" id="inputStartDate" value="01-01-2000" class="form-control" aria-describedby="helpTextStartDate"/>
+                <small id="helpTextStartDate" class="ml-3 form-text text-muted">
+                    Deve ser no formato 99-99-9999. Exemplo: 01-01-2019
+                </small>
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="inputEndDate" class="col-sm-2 control-label">Data final:</label>
+                <input type="text" id="inputEndDate" value="01-01-2019" class="form-control" aria-describedby="helpTextEndDate"/>
+                <small id="helpTextEndDate" class="ml-3 form-text text-muted">
+                    Deve ser no formato 99-99-9999. Exemplo: 01-01-2019
+                </small>
+            </div>
+
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" id="buttonSearch" class="btn btn-primary btn-lg">Search
+                    <button type="submit" id="buttonSearch" class="btn btn-primary">Pesquisar
                     </button>
                 </div>
             </div>
@@ -51,7 +57,7 @@
             <tr>
                 <th>Placa</th>
                 <th>POI</th>
-                <th>Raio</th>
+                <th>Raio (m)</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>Tempo (segundos)</th>
@@ -65,14 +71,13 @@
 <div class="container">
     <footer>
         <p>
-            © <a href="https://bitbucket.org/lincolnpomper/location-api-rest/">location-api-rest</a> 2019
+            Lincoln Pompermaier - 2019 - Fonte: <a href="https://bitbucket.org/lincolnpomper/location-api-rest/">location-api-rest</a>
         </p>
     </footer>
 </div>
 
 <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 
 </body>

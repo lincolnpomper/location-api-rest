@@ -1,4 +1,4 @@
-var tHead = '<thead><tr><th>Placa</th><th>POI</th><th>Raio</th><th>Latitude</th><th>Longitude</th><th>Tempo (segundos)</th></tr></thead>';
+var tHead = '<thead><tr><th>Placa</th><th>POI</th><th>Raio (m)</th><th>Latitude</th><th>Longitude</th><th>Tempo (segundos)</th></tr></thead>';
 
 $(document).ready(function () {
 
