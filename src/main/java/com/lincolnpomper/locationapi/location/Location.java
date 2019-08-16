@@ -1,11 +1,10 @@
 package com.lincolnpomper.locationapi.location;
 
-import com.lincolnpomper.locationapi.data.LocationFileData;
+import com.lincolnpomper.locationapi.file.LocationFileData;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,7 +14,7 @@ import javax.validation.constraints.Size;
 	@Id @ApiModelProperty(notes = "Name should have at least 1 character") @Size(min = 1, message = "Name should have at least 1 character")
 	private String name;
 
-	@ApiModelProperty @NotNull private Double radius;
+	@ApiModelProperty @NotNull private Integer radius;
 
 	@ApiModelProperty @NotNull private Double latitude;
 
@@ -27,12 +26,12 @@ import javax.validation.constraints.Size;
 	public Location(LocationFileData data) {
 		super();
 		this.name = data.name;
-		this.radius = Double.valueOf(data.values[0]);
+		this.radius = Integer.valueOf(data.values[0]);
 		this.latitude = Double.valueOf(data.values[1]);
 		this.longitude = Double.valueOf(data.values[2]);
 	}
 
-	public Location(String name, Double radius, Double latitude, Double longitude) {
+	public Location(String name, Integer radius, Double latitude, Double longitude) {
 		super();
 		this.name = name;
 		this.radius = radius;
@@ -48,11 +47,11 @@ import javax.validation.constraints.Size;
 		this.name = name;
 	}
 
-	public Double getRadius() {
+	public Integer getRadius() {
 		return radius;
 	}
 
-	public void setRadius(Double radius) {
+	public void setRadius(Integer radius) {
 		this.radius = radius;
 	}
 

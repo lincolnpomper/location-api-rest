@@ -1,32 +1,49 @@
 package com.lincolnpomper.locationapi.vehicle;
 
-import com.lincolnpomper.locationapi.data.LocationFileData;
+import com.lincolnpomper.locationapi.file.LocationFileData;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.Date;
 import java.util.Locale;
 
-@Entity @ApiModel(description = "Represents a vehicle Location and State. ") public class VehicleLocation {
+@Entity
+@ApiModel(description = "Represents a vehicle Location and State. ")
+public class VehicleLocation {
 
 	private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d y HH:mm:ss zXX").withLocale(Locale.ENGLISH);
 
-	@Id @GeneratedValue private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-	@ManyToOne private Vehicle vehicle;
+	@ManyToOne
+	private Vehicle vehicle;
 
-	@ApiModelProperty @NotNull private LocalDateTime date;
-	@ApiModelProperty @NotNull private Integer speed;
-	@ApiModelProperty @NotNull private Double latitude;
-	@ApiModelProperty @NotNull private Double longitude;
-	@ApiModelProperty @NotNull private Boolean ignitionState;
+	@ApiModelProperty
+	@NotNull
+	private LocalDateTime date;
+
+	@ApiModelProperty
+	@NotNull
+	private Integer speed;
+
+	@ApiModelProperty
+	@NotNull
+	private Double latitude;
+
+	@ApiModelProperty
+	@NotNull
+	private Double longitude;
+
+	@ApiModelProperty
+	@NotNull
+	private Boolean ignitionState;
 
 	public VehicleLocation() {
 	}
@@ -38,9 +55,13 @@ import java.util.Locale;
 
 		this.date = LocalDateTime.parse(data.values[0], formatter);
 		this.speed = Integer.valueOf(data.values[1]);
-		this.latitude = Double.valueOf(data.values[2]);
-		this.longitude = Double.valueOf(data.values[3]);
+		this.longitude = Double.valueOf(data.values[2]);
+		this.latitude = Double.valueOf(data.values[3]);
 		this.ignitionState = Boolean.parseBoolean(data.values[4]);
+	}
+
+	public Integer getSpeed() {
+		return speed;
 	}
 
 	public LocalDateTime getDate() {
@@ -49,10 +70,6 @@ import java.util.Locale;
 
 	public void setDate(LocalDateTime date) {
 		this.date = date;
-	}
-
-	public Integer getSpeed() {
-		return speed;
 	}
 
 	public void setSpeed(Integer speed) {

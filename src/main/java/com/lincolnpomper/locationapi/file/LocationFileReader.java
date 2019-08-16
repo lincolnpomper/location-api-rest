@@ -1,4 +1,4 @@
-package com.lincolnpomper.locationapi.data;
+package com.lincolnpomper.locationapi.file;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

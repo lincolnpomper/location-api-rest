@@ -1,4 +1,4 @@
-package com.lincolnpomper.locationapi.data;
+package com.lincolnpomper.locationapi.file;
 
 import com.lincolnpomper.locationapi.location.Location;
 import com.lincolnpomper.locationapi.location.LocationRepository;
@@ -20,6 +20,7 @@ import java.util.List;
 
 	@Autowired public DataLoader(LocationRepository locationRepository, VehicleRepository vehicleRepository,
 			VehicleLocationRepository vehicleLocationRepository) {
+
 		this.locationRepository = locationRepository;
 		this.vehicleRepository = vehicleRepository;
 		this.vehicleLocationRepository = vehicleLocationRepository;
