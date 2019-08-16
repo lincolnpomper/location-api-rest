@@ -21,15 +21,15 @@
 Essa aplicação determina o tempo percorrido ou em repouso de veículos passando por pontos de interesse (POI). Para simplificar o cálculo do resultado, não estão sendo calculadas as trajetórias usando a valocidade dos veículos e a Terra foi considerada como uma esfera.
 
 ---
+
 **Para rodar o projeto:**
+
 *Deve ser utilizado Java 8 ou maior para compilar o projeto.*
+
 1. Clone esse repositório
-2. Compile:
-$ mvn package
-3. Execute:
-$ java -jar target/myapplication-0.0.1-SNAPSHOT.jar
-4. Acesse a url:
-http://localhost:8080
+2. Compile: $ mvn package
+3. Execute: $ java -jar target/myapplication-0.0.1-SNAPSHOT.jar
+4. Acesse a url: http://localhost:8080
 
 ---
 
