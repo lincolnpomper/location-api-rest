@@ -24,11 +24,11 @@ Essa aplicação determina o tempo percorrido ou em repouso de veículos passand
 
 **Para rodar o projeto:**
 
-*Deve ser utilizado Java 8 ou maior para compilar o projeto.*
+*Deve ser utilizado Java 8 para compilar o projeto. Para Java 11, devem ser incluídas as dependências de JAXB APIs no pom.xml*
 
 1. Clone esse repositório
 2. Compile: $ mvn package
-3. Execute: $ java -jar target/myapplication-0.0.1-SNAPSHOT.jar
+3. Execute: $ java -jar target/com.lincolnpomper.locationapi-0.0.1-SNAPSHOT.jar
 4. Acesse a url: http://localhost:8080
 
 ---
