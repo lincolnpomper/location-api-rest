@@ -1,4 +1,4 @@
-var tHead = '<thead><tr><th>Placa</th><th>POI</th><th>Raio (m)</th><th>Latitude</th><th>Longitude</th><th>Tempo (segundos)</th></tr></thead>';
+var tHead = '<thead><tr><th>Placa</th><th>POI</th><th>Raio (m)</th><th>Latitude</th><th>Longitude</th><th>Tempo (minutos)</th></tr></thead>';
 
 $(document).ready(function () {
 
@@ -51,7 +51,7 @@ function findVehiclePositionsByPlate() {
                     '<td>' + item.location.radius + '</td>' +
                     '<td>' + item.location.latitude + '</td>' +
                     '<td>' + item.location.longitude + '</td>' +
-                    '<td>' + item.timeSpent + '</td>' +
+                    '<td>' + item.timeSpentInMinutes + '</td>' +
                     '</tr>';
                 });
 

@@ -1,8 +1,5 @@
 package com.lincolnpomper.locationapi.coordinate;
 
-import com.lincolnpomper.locationapi.coordinate.Coordinate;
-import com.lincolnpomper.locationapi.coordinate.FindDistance;
-import com.lincolnpomper.locationapi.coordinate.Unit;
 import org.junit.Assert;
 import org.junit.Test;
 

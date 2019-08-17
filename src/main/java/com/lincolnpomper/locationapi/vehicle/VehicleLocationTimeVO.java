@@ -8,12 +8,12 @@ public class VehicleLocationTimeVO {
 
 	private Location location;
 
-	private Long timeSpent;
+	private Long timeSpentInMinutes;
 
-	public VehicleLocationTimeVO(Vehicle vehicle, Location location, Long timeSpent) {
+	public VehicleLocationTimeVO(Vehicle vehicle, Location location, Long timeSpentInMinutes) {
 		this.vehicle = vehicle;
 		this.location = location;
-		this.timeSpent = timeSpent;
+		this.timeSpentInMinutes = timeSpentInMinutes;
 	}
 
 	public Vehicle getVehicle() {
@@ -32,11 +32,11 @@ public class VehicleLocationTimeVO {
 		this.location = location;
 	}
 
-	public Long getTimeSpent() {
-		return timeSpent;
+	public Long getTimeSpentInMinutes() {
+		return timeSpentInMinutes;
 	}
 
-	public void setTimeSpent(Long timeSpent) {
-		this.timeSpent = timeSpent;
+	public void setTimeSpentInMinutes(Long timeSpentInMinutes) {
+		this.timeSpentInMinutes = timeSpentInMinutes;
 	}
 }
