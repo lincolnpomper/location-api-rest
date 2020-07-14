@@ -1,8 +1,12 @@
 package com.lincolnpomper.locationapi.file;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +14,27 @@ import java.util.Map;
 
 public class LocationFileReader {
 
-	static final String BASE_PATH = "src/main/resources/";
-
 	private static final String SEPARATOR = ",";
 	private static LocationFileReader me;
 
 	private Map<ResourceType, List<LocationFileData>> resources = new HashMap<>();
 	private BufferedReader reader = null;
+
+	public enum ResourceType {
+
+		LocationOfInterest("base_pois_def.csv"),
+		VehiclePositions("posicoes.csv");
+
+		private String value;
+
+		ResourceType(String value) {
+			this.value = value;
+		}
+
+		String getValue() {
+			return value;
+		}
+	}
 
 	private LocationFileReader() {
 	}
@@ -36,17 +54,13 @@ public class LocationFileReader {
 		}
 	}
 
-	public List<LocationFileData> getList(ResourceType key) {
-		return resources.get(key);
-	}
-
 	private List<LocationFileData> parseCSVFromFile(String fileName) {
 
 		List<LocationFileData> list = new ArrayList<>();
 
 		try {
 
-			reader = new BufferedReader(new FileReader(fileName));
+			reader = findFileFromEnvironment(fileName);
 			String line;
 
 			// skip header
@@ -89,18 +103,28 @@ public class LocationFileReader {
 		return list;
 	}
 
-	public enum ResourceType {
+	private BufferedReader findFileFromEnvironment(String fileName) {
 
-		LocationOfInterest("base_pois_def.csv"), VehiclePositions("posicoes.csv");
+		BufferedReader reader = null;
 
-		private String value;
-
-		ResourceType(String value) {
-			this.value = BASE_PATH + value;
+		try {
+			File f = new File(fileName);
+			if (f.exists() && !f.isDirectory()) {
+				reader = new BufferedReader(new FileReader(fileName));
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 
-		String getValue() {
-			return value;
+		if (reader == null) {
+			InputStream in = getClass().getResourceAsStream(File.separator + fileName);
+			reader = new BufferedReader(new InputStreamReader(in));
 		}
+
+		return reader;
+	}
+
+	public List<LocationFileData> getList(ResourceType key) {
+		return resources.get(key);
 	}
 }
