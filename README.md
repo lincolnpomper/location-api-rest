@@ -20,6 +20,10 @@
 
 Essa aplicação determina o tempo percorrido ou em repouso de veículos passando por pontos de interesse (POI). Para simplificar o cálculo do resultado, não estão sendo calculadas as trajetórias usando a valocidade dos veículos e a Terra foi considerada como uma esfera.
 
+**Exemplo da aplicação rodando localmente:**
+
+![Alt text](readme-files/screen.png?raw=true "Title")
+
 ---
 
 **Para rodar o projeto:**
